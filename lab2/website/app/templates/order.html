@@ -1,0 +1,258 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Project</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../static/css/index.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/fontawesome.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+  <link rel="stylesheet" type="text/css" href="../static/css/sidebar.css">
+
+  <style>
+    /* html { overflow:  hidden; } */
+    /* .invert { filter: invert(1);} */
+  </style>
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+  <script type="text/javascript">
+    $(window).on('scroll', function () {
+      if ($(window).scrollTop()) {
+        $('nav').addClass('black');
+      }
+      else {
+        $('nav').removeClass('black');
+      }
+    })
+
+    $(document).ready(function () {
+
+      $('.switch').click(function () {
+        $(this).toggleClass("switchOn");
+      });
+
+    });
+
+    $(document).ready(function () {
+      $('.switch').click(function () {
+        $('body').toggleClass('inverse');
+      });
+    });
+
+    $(document).ready(function () {
+      $('.plus_btn').click(function () {
+        $('.text_box2').toggleClass('disp');
+      });
+    });
+
+
+  </script>
+</head>
+
+<body>
+  <div id="particles-js">
+
+
+    <div class="page-wrapper">
+      <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+        <i class="fas fa-bars"></i>
+      </a>
+      <nav id="sidebar" class="sidebar-wrapper">
+        <div class="sidebar-content">
+          <div class="sidebar-brand">
+            {% if current_user.is_anonymous %}
+            <li><a class="sidebar-login" href="{{ url_for('login') }}">Login</a></li>
+            {% else %}
+            <li><a class="sidebar-login" href="{{ url_for('logout') }}">Logout</a></li>
+            {% endif %}
+            <div id="close-sidebar">
+              <i class="fas fa-times"></i>
+            </div>
+          </div>
+          <div class="sidebar-header">
+            <div class="user-pic">
+              <img class="img-responsive img-rounded"
+                src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+                alt="User picture">
+            </div>
+            <div class="user-info">
+              <span class="user-name">{{ current_user.username }}<br>
+                <strong>{{ current_user.email }}</strong>
+              </span>
+              <span class="user-role">User</span>
+              <span class="user-status">
+                <i class="fa fa-circle"></i>
+                <span>Online</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="sidebar-menu">
+            <ul>
+              <li>
+                <a href="#">
+                  <i class="fa fa-book"></i>
+                  <span>Your solutions</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fa fa-calendar"></i>
+                  <span>Your profile</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fa fa-folder"></i>
+                  <span>Settings</span>
+                </a>
+              </li>
+              <p>
+              </p>
+              <li>
+                <a href="{{ url_for('logout') }}">
+                  <i class="fa fa-folder"></i>
+                  <span>Logout</span>
+                </a>
+              </li>
+              <p></p>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <nav id="nav">
+      <ul>
+        <li class="vidstup"><a href="#search">Search</a></li>
+        <li><a href="#test">Test</a></li>
+        <li><a href="#result">Result</a></li>
+        {% if current_user.is_anonymous %}
+        <li><a href="{{ url_for('login') }}">Login</a></li>
+        {% else %}
+        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        {% endif %}
+        <li></li>
+        <label>
+          <input type="checkbox" name="checkboxName" class="checkbox">
+          <div class="switch"></div>
+        </label>
+        </li>
+      </ul>
+    </nav>
+    <form action="" id="order-form">
+      <div class="container">
+        <div class="generator1">Please enter your data</div>
+      </div>
+      <a name="search"></a>
+      <div class="textarea_box">
+        <textarea id="company_name" id="search_field" name="search_field" required="required" class="text_box" type="text"
+          placeholder="Enter your search query or tag" maxlength="1000" id="searchInputField" autofocus=""></textarea>
+      </div>
+
+
+      <div class="container2">
+        <div class="generator2">Please enter your data</div>
+      </div>
+      <button class="plus_btn">+</button>
+      <a name="test"></a>
+      <div class="textarea_box2">
+        <textarea id="min_budget" id="argument" name="argument" required="required" class="text_box2 disp" type="text"
+          placeholder="Enter your argument" maxlength="1000" id="searchInputField" name="name" autofocus=""></textarea>
+        <textarea id="max_budget" id="result" name="result" required="required" class="text_box2 disp" type="text"
+          placeholder="Enter your result" maxlength="1000" id="searchInputField" name="name" autofocus=""></textarea>
+      </div>
+
+      <div id="app-cover">
+        <div id="select-box">
+          <input type="checkbox" id="options-view-button">
+          <div id="select-button" class="brd">
+            <div id="selected-value">
+              <span>Select a platform</span>
+            </div>
+            <div id="chevrons">
+              <i class="fas fa-chevron-up"></i>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </div>
+          <div id="options">
+            <div class="option">
+              <input class="s-c top" type="radio" name="platform" value="codepen" value="media" id="media_input">
+              <input class="s-c bottom" type="radio" name="platform" value="codepen">
+              <i class="fab fa-codepen"></i>
+              <span class="label">CodePen</span>
+              <span class="opt-val">CodePen</span>
+            </div>
+            <div class="option">
+              <input class="s-c top" type="radio" name="platform" value="dribbble" value="outdoor" id="outdoor_input">
+              <input class="s-c bottom" type="radio" name="platform" value="dribbble">
+              <i class="fab fa-dribbble"></i>
+              <span class="label">Dribbble</span>
+              <span class="opt-val">Dribbble</span>
+            </div>
+            <div class="option">
+              <input class="s-c top" type="radio" name="platform" value="behance" value="product placement" id="product_placement_input">
+              <input class="s-c bottom" type="radio" name="platform" value="behance">
+              <i class="fab fa-behance"></i>
+              <span class="label">Behance</span>
+              <span class="opt-val">Behance</span>
+            </div>
+            <div class="option">
+              <input class="s-c top" type="radio" name="platform" value="hackerrank" value="tv" id="tv_input">
+              <input class="s-c bottom" type="radio" name="platform" value="hackerrank">
+              <i class="fab fa-hackerrank"></i>
+              <span class="label">HackerRank</span>
+              <span class="opt-val">HackerRank</span>
+            </div>
+            <div class="option">
+              <input class="s-c top" type="radio" name="platform" value="stackoverflow" value="radio" id="radio_input">
+              <input class="s-c bottom" type="radio" name="platform" value="stackoverflow">
+              <i class="fab fa-stack-overflow"></i>
+              <span class="label">StackOverflow</span>
+              <span class="opt-val">StackOverflow</span>
+            </div>
+            <div class="option">
+              <input class="s-c top" type="radio" name="platform" value="freecodecamp">
+              <input class="s-c bottom" type="radio" name="platform" value="freecodecamp">
+              <i class="fab fa-free-code-camp"></i>
+              <span class="label">FreeCodeCamp</span>
+              <span class="opt-val">FreeCodeCamp</span>
+            </div>
+            <div id="option-bg"></div>
+          </div>
+        </div>
+      </div> 
+
+      <a id="submit_button" class="next_el">
+        <button id="submit_button" class="learn-more">
+          <div class="circle">
+            <span class="icon arrow"></span>
+          </div>
+          <p class="button-text">S E A R C H</p>
+        </button>
+      </a>
+      <textarea name="description" id="description_input" class="non-display"></textarea>
+    </form>
+
+
+    <canvas class="particles-js-canvas-el" width="980" height="2701" style="width: 100%; height: 100%;"></canvas>
+  </div>
+  <script src="../static/js/helpers.js"></script>
+  <script src="../static/js/loader.js"></script>
+  <script src="../static/js/post_order.js"></script>
+  <script>
+    window.onload = function () {
+      document.getElementById("order-form").onsubmit = function () {
+        make_order();
+        return false;
+      };
+    };
+  </script>
+  <script src="../static/js/particles2.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="../static/js/sidebar.js"></script>
+  <script src="../static/js/index_text.js"></script>
+  <script src="../static/js/index_background.js"></script>
+
+</body>
+
+</html>
