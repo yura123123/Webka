@@ -8,9 +8,16 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
+    photo=db.Column(db.String(255))
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
+
+    def set_photo(self, photo):
+        self.photo = photo
+
+    def check_photo(self, photo):
+        return self.photo==photo
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -22,4 +29,3 @@ class User(UserMixin, db.Model):
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
-
