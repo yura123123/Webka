@@ -37,9 +37,9 @@ class UserModelCase(unittest.TestCase):
 
     def test_hashing(self):
         u = User(username='yura')
-        u.set_password('huila')
-        self.assertFalse(u.check_password('nehuila'))
-        self.assertTrue(u.check_password('huila'))
+        u.set_password('1234')
+        self.assertFalse(u.check_password('4321'))
+        self.assertTrue(u.check_password('1234'))
 
     def test_avatar(self):
         u = User(username='susan')
